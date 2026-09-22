@@ -1,0 +1,149 @@
+calculator code :
+index.html
+
+
+<html>
+    <head>
+        <title>Servlet Calculator</title>
+    </head>
+    <body>
+        <form action= "calcy" method="get">
+            Enter number 1:<input type="text" name="N1"><br><br>
+            Enter number 1:<input type="text" name="N2"><br><br>
+            Select operator: <select name="operator">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+                </select><br><br><br>
+                <input type ="submit" value="Calculate">
+                <input type ="submit" value="Reset">
+        </form>
+    </body>
+</html>  
+
+
+
+calcy.java
+
+import java.io.*;
+import javax.servlet.*;
+public class calcy extends GenericServlet{
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+     PrintWriter out = res.getWriter();
+     int a = Integer.parseInt(req.getParameter("N1"));
+     int b = Integer.parseInt(req.getParameter("N2"));
+     String OP=req.getParameter("operator");
+     if(OP.equals("+")){
+         out.println("Addition is:"+(a+b));
+     }else if(OP.equals("-")){
+         out.println("Subtraction is:"+(a-b));
+     }else if(OP.equals("*")){
+         out.println("Multiplication is:"+(a*b));
+     }else{
+        out.println("Division is:"+(a/b)); 
+     }
+     
+    }
+}
+
+
+loginpage
+index.html
+
+
+<html>
+    <head>
+        <title>Login </title>
+    </head>
+    <body>
+        <form action="Loginpage" method="get">
+            Enter Username <input type="text" name="Username"><br><br>
+            Enter Password <input type="password" name="Password">
+            <input type="Submit" value="Login">
+            <input type="Reset" value="Reset">
+        </form>
+    </body>
+</html>
+
+
+
+loginpage.java
+
+import java.io.*;
+import javax.servlet.*;
+public class Loginpage extends GenericServlet{
+     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+     PrintWriter out = res.getWriter();
+     String Username = req.getParameter("Username");
+     String Password = req.getParameter("Password");
+     if (Username.equals("Sid") && Password.equals("1234")){
+         out.println("Welcome to the Servlet world");
+     }else{
+         out.println("Invalid Password");
+     }
+     }
+     
+}
+
+
+
+
+
+6.Create a JSP page to demonstrate the use of Expression language.
+
+Index.jsp
+
+<body>
+    <h3>Welcome to index page</h3>
+    <% session.setAttribute("user","Admin"); %>
+<%
+Cookie ck=new Cookie("name","mycookie");
+response.addCookie(ck);
+%>
+<form action="ExpressionLanguage.jsp">
+Enter Name:<input type="text" name="name" /><br/><br/>
+<input type="submit" value="Submit"/>
+</form>
+</body>
+
+
+ExpressionLanguage.jsp
+    <body>
+        Welcome ,${param.name}
+        Session Value is, ${sessionScope.user}
+        Cookie name is, ${cookie.name.value}
+        
+    </body>
+
+
+EmptyOperator.jsp
+    <body>
+     <H1>Empty Operator Example</H1>
+The Value for the Empty operator is:: ${empty "txxt"}
+    </body>
+
+
+ELconditional_op.jsp
+
+<body>
+
+    <h2>Conditional Operator</h2>
+    The result of 10>2 is: "${(10>2)?'greater':'lesser'}"
+</body>
+
+ELArithemeticOperator.jsp
+    <body> 
+        5*5+4: ${5*5+4} <br>
+        1.4E4+1.4: ${1.4E4+1.4}<br>
+        10 mod 4:${10 mod 4} <br>
+        15 div 3: ${15 div 3}<br> 
+    </body>
+
+
+
+
+
+
+
+
