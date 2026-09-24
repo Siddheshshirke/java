@@ -1,85 +1,66 @@
-val.jsp
+Jug
+Code:-
+j1=int(input("Enter Capacity of jug 1:"))
+j2=int(input("Enter Capacity of jug 2:"))
+goal=int(input("Enter Target Amount:"))
+visited=set()
+def dfs(x,y,path):
+ if x==goal or y==goal:
+ path.append((x,y))
+ print("\nGoal achieved Successfully!")
+ print("Solution Path:")
+ for state in path:
+ print(state)
+ return True
+ 
+ if (x,y) in visited:
+ return False
+ visited.add((x,y))
+ path.append((x,y))
+ 
+ next_state=[
+ (j1,y),
+ (x,j2),
+ (0,y),
+ (x,0),
+ 
+ (x-min(x,j2-y),
+ y+min(x,j2-y)),
+ 
+ (x+min(y,j1-x),
+ y-min(y,j1-x))
+ ]
+ for state in next_state:
+ if dfs(state[0],state[1],path.copy()):
+ return True
+ return False
+if not dfs(0,0,[]):
+ print("No solution found")
 
 
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%!
-int ageInNumbers;
-private static final String EMAIL_REGEX =
-"^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
-%>
-<%
-String name = request.getParameter("fullname");
-String age = request.getParameter("age");
-String email = request.getParameter("email");
-String gender = request.getParameter("gender");
-String hb[] = request.getParameterValues("hob");
-if (name .isEmpty() || age.isEmpty()|| email.isEmpty()|| gender.isEmpty())
-{
-    out.println("<font color=red>Please fill all the fields</font><br>" );
-}
-if (name== null | name.trim().isEmpty()){
-   out.println("<h3 style='color:red'>Name cannot be empty.</h3>");
-}
-else if (!name.matches("[a-zA-Z ]+")) {
-    out.println("<h3 style='color:red'>Name should contain only alphabets and spaces.</h3>");
-} else {
-    out.println("<h3 style='color:green'>Valid Name: " + name + "</h3>");
-}
-if (!email.matches(EMAIL_REGEX)) {
-    out.println("<font color='red'>Correct Your Email Address</font><br>");
-}
-try {
-    ageInNumbers = Integer.parseInt(age.trim());
-} catch (NumberFormatException e) {
-    out.println("<font color='red'>Age must be in numbers</font><br>");
-}
-if (ageInNumbers <= 18 && ageInNumbers >=60){
-    out.println("<font color=red>Age must between 18 to 60</font><br>");  
-}
-%>
-
-<h1>Registration Form</h1>
-Your Entered Information is as follows: <br>
-Full Name <b>:<%=name%></b><br>
-Age <b>:<%=age%></b><br>
-EMail <b>:<%=email%></b><br>
-Gender <b>:<%=gender%></b><br>
-Hobbies <b>:
-<%
-
-if(hb != null && hb.length != 0)
-
-{
-
-    for(int i = 0; i < hb.length; i++)
-
-    {
-
-        out.println(hb[i]);
-
-    }
-
-}
-
-%>
 
 
-index.jsp
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html>
-    <body>
-        <h1>Registration Form</h1>
-        <form action="val.jsp">
-            Enter Your Name <input type="text" name="fullname"><br>
-            Enter Your Age <input type="text" name="age"><br>
-            Select Hobbies <input type="checkbox" name="hob" value="Singing"> Singing
-            <input type="checkbox" name="hob" value="Reading">Reading Books
-            <input type="checkbox" name="hob" value="Cricket">Playing Cricket<br>
-            Enter E-mail<input type="text" name="email"><br>
-            Select Gender <input type="radio" name="gender" value="Male">Male<br>
-            <input type="radio" name="gender" value="female">Female<br>
-            <input type="radio" name="gender" value="Other">Other<br>
-            <input type ="Submit"  value="submit Form">    
-        </form>
-    </body>
-</html>
+
+Vaccum cleaner
+rooms = {}
+rooms['A'] = input("Enter status of Room A(Clean/Dirty):")
+rooms['B'] = input("Enter status of Room B(Clean/Dirty):")
+if rooms['A'] == "Clean" and rooms['B'] == "Clean":
+ print("\nAll rooms are clean. Task completed.")
+else:
+ if rooms['A'] == "Dirty":
+ print("\nRoom A is Dirty")
+ print("Action:Suck")
+ rooms['A']="Clean"
+ print("Room A Cleaned")
+ else:
+ print("\nRoom A is Already Clean")
+ 
+ if rooms['B'] == "Dirty":
+ print("\nRoom B is Dirty")
+ print("Action:Suck")
+ rooms['B']="Clean"
+ print("Room B Cleaned")
+else:
+ print("\nRoom B is Already Clean")
+ print("\nAll rooms are clean.Task completed.")
